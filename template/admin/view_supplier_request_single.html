@@ -1,0 +1,71 @@
+{% extends 'admin/admin_base.html' %}
+{% block content %}
+
+<div class="container-fluid py-4">
+    <div class="row" style="margin-top: 50px;">
+        <div class="col-md-12 mt-4">
+            <div class="card">
+                <div class="card-header pb-0 px-3">
+                    <h6 class="mb-0">Supplier Information</h6>
+                </div>
+                <div class="card-body pt-4 p-3">
+                    <ul class="list-group">
+                        <li class="list-group-item border-0 d-flex flex-column p-4 mb-2 bg-gray-100 border-radius-lg">
+                            <!-- Center the profile picture above the details -->
+                            <div class="text-center mb-4">
+                                <div class="mb-3" style="width: 150px; margin: 0 auto;">
+                                    <img src="../static/media/{{ supplier.profile_picture }}" class="img-fluid border-radius-sm" alt="{{ supplier.name }}" style="width: 100%; height: auto; object-fit: cover;">
+                                </div>
+                                <h6 class="text-sm">{{ supplier.name }}</h6>
+                            </div>
+                            <div class="d-flex flex-column">
+                                <span class="mb-2 text-xs">Address: 
+                                    <span class="text-dark font-weight-bold ms-sm-2">{{ supplier.address }}</span>
+                                </span>
+                                <span class="mb-2 text-xs">Contact: 
+                                    <span class="text-dark ms-sm-2 font-weight-bold">{{ supplier.contact }}</span>
+                                </span>
+                                <span class="mb-2 text-xs">Email: 
+                                    <span class="text-dark ms-sm-2 font-weight-bold">{{ supplier.email }}</span>
+                                </span>
+
+                                <div class="mt-3">
+                                    <a href="../static/media/{{ supplier.id_proof }}" class="btn btn-info btn-icon-text">
+                                        ID Proof <i class="ti-printer btn-icon-append"></i>
+                                    </a>
+                                </div>
+                                <div class="mt-3">
+                                    <a href="../static/media/{{ supplier.licence }}" class="btn btn-primary btn-icon-text">
+                                        Licence <i class="ti-printer btn-icon-append"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Accept and Reject Buttons at the bottom -->
+                            <div class="mt-4 text-end">
+                                <a href="/admin_accept_supplier_request?id={{ supplier.id }}">
+                                    <button type="button" class="btn btn-success btn-icon-text">
+                                        Accept <i class=" btn-icon-append"></i>
+                                    </button>
+                                </a>
+                                <a href="/admin_reject_supplier_request?id={{ supplier.id }}">
+                                    <button type="button" class="btn btn-danger btn-icon-text">
+                                        Reject <i class=" btn-icon-append"></i>
+                                    </button>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if messages %}
+{% for m in messages %}
+<script>alert("{{ m }}")</script>
+{% endfor %}
+{% endif %}
+
+{% endblock %}

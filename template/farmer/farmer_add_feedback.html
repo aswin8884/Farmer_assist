@@ -1,0 +1,47 @@
+{% extends 'farmer/farmer_base.html' %}
+{% block content %}
+
+<section class="w3l-contact-main" id="contact">
+    <div class="contact-infhny py-5">
+        <div class="container py-md-5">
+            <div class="title-content text-center mb-md-5 mb-4">
+                <h6 class="title-subw3hny">Send Feedbacks</h6>
+                <!-- <h3 class="title-w3l mx-lg-5">Keep In Touch With Us.</h3>
+                <p class="text-para mt-2">Progressively syndicate user-centric schemas without front-end synergy. Monotonectally envisioneer.</p> -->
+            </div>
+            <div class="top-map">
+                <div class="map-content-9">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-top1">
+
+                            <div class="form-top">
+                                <div class="form-top-righ">
+                                    <textarea name="feedback" id="Message" placeholder="Feedbacks*" required=""></textarea>
+                                </div>
+                                
+                                <div class="form-top-righ">
+                                <h1>Give Us A Rating</h1>
+                                <select name="rating" class="rating">
+                                <option value="1">⭐</option>
+                                <option value="2">⭐⭐</option>
+                                <option value="3">⭐⭐⭐</option>
+                                <option value="4">⭐⭐⭐⭐</option>
+                                <option value="5">⭐⭐⭐⭐⭐</option>
+                                </select>
+                                </div>
+
+                            </div>
+                            <div class="text-center mt-5">
+                                <button type="submit" class="btn btn-style btn-primary">Send Now <i class="far fa-paper-plane ml-lg-3"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

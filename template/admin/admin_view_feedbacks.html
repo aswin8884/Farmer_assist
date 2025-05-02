@@ -1,0 +1,124 @@
+{% extends 'admin/admin_base.html' %}
+{% block content %}
+
+
+<style>
+    .container {
+        padding: 20px;
+    }
+
+    h2 {
+        font-family: 'Poppins', sans-serif;
+        color: #444;
+        margin-bottom: 20px;
+    }
+
+    .feedback-card {
+        background-color: #f5f5f5;
+        border: none;
+        border-radius: 10px;
+        transition: transform 0.2s ease-in-out;
+        margin-bottom: 20px;
+        padding: 15px;
+        width: 100%; /* Increased width */
+    }
+
+    .feedback-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-name {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .card-text {
+        margin-top: 5px;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: #555;
+    }
+
+    .profile-img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid #ddd;
+        margin-right: 10px;
+    }
+
+    .rating {
+        display: flex;
+        align-items: center;
+    }
+
+    .stars-outer {
+        display: flex;
+        justify-content: flex-start;
+        margin-right: 10px;
+    }
+
+    .stars-inner {
+        display: flex;
+        flex-direction: row-reverse;
+        width: 100%;
+        color: gold;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .star {
+        font-size: 1.5rem;
+        color: #ddd;
+    }
+
+    .star.filled {
+        color: gold;
+    }
+
+    @media (min-width: 768px) {
+        .feedback-card {
+            width: 80%; /* Adjust the card width for larger screens */
+        }
+    }
+
+</style>
+
+<div class="container">
+    <h2 class="text-center">User Feedbacks</h2>
+    <div class="row">
+        {% for feedback in feedbacks %}
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <div class="feedback-card shadow-sm">
+                <div class="d-flex align-items-start">
+                    <img src="../static/media/{{ feedback.farmer_id.profile_picture }}" alt="User" class="profile-img">
+                    <div>
+                        <h5 class="user-name">{{ feedback.farmer_id.name }}</h5>
+                        <div class="rating">
+                            <div class="stars-outer">
+                                {% for i in "12345"|make_list %}
+                                    <span class="star {% if feedback.rating >= i %}filled{% endif %}">⭐</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <p class="card-text">{{ feedback.feedback }}</p>
+                        <small class="text-muted">Submitted on: {{ feedback.feedback_on }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <div class="feedback-card">
+                <p class="text-muted">No feedbacks available.</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

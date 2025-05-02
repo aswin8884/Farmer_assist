@@ -1,0 +1,46 @@
+{% extends 'farmer/farmer_base.html' %}
+{% block content %}
+
+<section class="w3l-contact-main" id="contact">
+    <div class="contact-infhny py-5">
+        <div class="container py-md-5">
+            <div class="title-content text-center mb-md-5 mb-4">
+                <h6 class="title-subw3hny">Send a message to {{ specialist.name }}</h6>
+            </div>
+
+            <!-- Specialist Details Section -->
+            <div class="specialist-details mb-5">
+                <div class="d-flex align-items-center">
+                    <img src="../static/media/{{ specialist.profile_picture }}" alt="{{ specialist.name }}" class="rounded-circle me-3" style="width: 80px; height: 80px; object-fit: cover;">
+                    <div>
+                        <h4 class="mb-1">{{ specialist.name }}</h4>
+                        <p class="mb-0"><strong>Contact:</strong> {{ specialist.contact }}</p>
+                        <p class="mb-0"><strong>Email:</strong> {{ specialist.email }}</p>
+                        <p class="mb-0"><strong>Adderss:</strong> {{ specialist.address }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Message Form Section -->
+            <div class="top-map">
+                <div class="map-content-9">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-top1">
+                            <div class="form-top">
+                                <div class="form-top-righ">
+                                    <textarea name="message" id="Message" placeholder="Message*" required=""></textarea>
+                                </div>
+                            </div>
+                            <div class="text-center mt-5">
+                                <button type="submit" class="btn btn-style btn-primary">Send Now <i class="far fa-paper-plane ml-lg-3"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

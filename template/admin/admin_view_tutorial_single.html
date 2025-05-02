@@ -1,0 +1,31 @@
+{% extends 'admin/admin_base.html' %}
+{% block content %}
+<div class="content">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>{{tutorial.title}}</h4>
+                    </div>
+
+                    <div class="gmap_unix card-body">
+                   <iframe width="868" height="488" src="{{tutorial.video_link}}" title="How to Start a Small Farm | A Step-by-Step Guide" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>    
+                <p>{{tutorial.description}}</p>
+                <div style="display: flex;">
+                    <div>
+                        <a href="/admin_delete_tutorial?id={{tutorial.id}}"><button class="btn btn-danger">Delete</button></a>
+                    </div>
+                    <div style="padding-left: 10px;">
+                        <a href="/admin_update_tutorial?id={{tutorial.id}}"><button class="btn btn-info">Update</button></a>
+                    </div>
+                </div>
+                </div>
+
+                </div>
+                <!-- /# card -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

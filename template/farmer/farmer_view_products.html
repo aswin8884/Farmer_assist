@@ -1,0 +1,30 @@
+{% extends 'farmer/farmer_base.html' %}
+{% block content %}
+
+<section class="w3l-team py-5" id="w3l-team">
+    <div class="container py-md-5">
+        <div class="row text-left">
+            {% for p in products %}
+            <div class="col-md-3 col-6 mt-5">
+                <div class="team-grids text-center">
+                    <img src="../static/media/{{p.product_image}}" class="img-fluid" alt="">
+                    <div class="team-info">
+                        <div class="caption">
+                            <div class="social-icons-section text-center">
+                                <a class="fac" href="/farmer_view_product_single?id={{p.id}}">
+                                    <Button class="btn btn-outline-light">View</Button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h4>{{p.product}}</h4>
+                <h6>{{p.category_id.category}}</h6>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

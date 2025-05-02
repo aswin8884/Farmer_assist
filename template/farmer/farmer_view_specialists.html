@@ -1,0 +1,30 @@
+{% extends 'farmer/farmer_base.html' %}
+{% block content %}
+
+<section class="w3l-team py-5" id="w3l-team">
+    <div class="container py-md-5">
+        <div class="row text-left">
+            {% for s in specialists %}
+            <div class="col-md-3 col-6 mt-5">
+                <div class="team-grids text-center">
+                    <img src="../static/media/{{s.profile_picture}}" class="img-fluid" alt="">
+                    <div class="team-info">
+                        <div class="caption">
+                            <div class="social-icons-section text-center">
+                                <a class="fac" href="/farmer_message_specialists?id={{s.id}}">
+                                    <Button class="btn btn-outline-light">Message</Button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h4>{{s.name}}</h4>
+                <h6>specialist</h6>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

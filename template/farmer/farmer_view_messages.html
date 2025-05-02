@@ -1,0 +1,133 @@
+{% extends 'farmer/farmer_base.html' %}
+{% block content %}
+
+<style>
+    .chat-card {
+        background-color: #f5f5f5;
+        border: none;
+        border-radius: 10px;
+        transition: transform 0.2s ease-in-out;
+        margin-bottom: 20px;
+    }
+
+    .chat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .user-name {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: #555;
+    }
+
+    .profile-img {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid #ddd;
+        margin-right: 10px;
+    }
+
+    .chat-left, .chat-right {
+        display: flex;
+        align-items: center;
+    }
+
+    .chat-left {
+        justify-content: flex-start;
+    }
+
+    .chat-right {
+        justify-content: flex-end;
+        text-align: right;
+    }
+
+    .chatbox-message, .chatbox-reply {
+        border-radius: 10px;
+        padding: 10px 15px;
+        max-width: 75%;
+    }
+
+    .chatbox-message {
+        background-color: #e1ffc7;
+        border-radius: 10px 10px 10px 0;
+    }
+
+    .chatbox-reply {
+        background-color: #d1ecf1;
+        border-radius: 10px 10px 0 10px;
+    }
+
+    .alert {
+        font-size: 0.9rem;
+        background-color: #ffefd5;
+        border: none;
+        color: #856404;
+    }
+
+    h2 {
+        font-family: 'Poppins', sans-serif;
+        color: #444;
+    }
+</style>
+
+<section class="w3l-chatbox py-5" id="chatbox">
+    <div class="container py-md-5 py-2">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <h2 class="mb-4 text-center">Chat with Specialist</h2>
+
+                {% for c in chats %}
+                <div class="card chat-card shadow-sm">
+                    <div class="card-body">
+                        <!-- Farmer's message on the left -->
+                        <div class="chat-left mb-3">
+                            <div>
+                                <div class="chatbox-message">
+                                    <img src="../static/media/{{c.farmer_id.profile_picture}}" alt="Farmer" class="profile-img">
+                                    <h5 class="user-name">You</h5>
+                                    <p class="card-text">{{ c.message }}</p>
+                                    <small class="text-muted">Sent on: {{ c.message_on }}</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% if c.reply %}
+                        <!-- Specialist's reply on the right -->
+                        <div class="chat-right mt-3">
+                            <div>
+                                <div class="chatbox-reply">
+                                    <img src="../static/media/{{c.specialist_id.profile_picture}}" alt="Specialist" class="profile-img">
+                                    <h5 class="user-name">{{c.specialist_id.name}}</h5>
+                                    <p class="card-text">{{ c.reply }}</p>
+                                    <small class="text-muted">Replied on: {{ c.reply_on }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="alert alert-warning mt-3" role="alert">
+                            Reply pending from {{c.specialist_id.name}}.
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

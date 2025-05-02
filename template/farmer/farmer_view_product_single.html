@@ -1,0 +1,52 @@
+{% extends 'farmer/farmer_base.html' %}
+{% block content %}
+
+<section class="w3l-circles py-5" id="checkout">
+    <div class="container py-md-5 py-2">
+        <!-- Checkout Summary -->
+        <div class="row w3l-circles">
+            <div class="col-lg-6 circles-left">
+                <img src="../static/media/{{ product.product_image }}" alt="{{ product }}" class="radius-image img-fluid">
+            </div>
+            <div class="col-lg-6 circles-right mt-lg-0 mt-5 align-self position-relative">
+                <h6 class="title-subw3hny">Checkout</h6>
+                <h3 class="title-w3l mb-4">Order Summary</h3>
+                <form method="post" action="/farmer_booking_product">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <strong>Product:</strong> {{ product.product }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Category:</strong> {{ product.category_id.name }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Description:</strong> {{ product.description }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Available Stock:</strong> {{ product.quantity }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Price:</strong> {{ product.price }} RS/-
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Enter Quantity:</strong>
+                            <input type="number" class="form-control" name="quantity" placeholder="Enter Quantity">
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Enter Shipping Address:</strong>
+                            <textarea name="shipping_address" id="Sender" placeholder="Enter Shipping Address" rows="4" required="" class="form-control"></textarea>
+                        </li>
+                    </ul>
+
+                    <div class="w3banner-content-btns mt-4">
+                        <button type="submit" class="btn btn-style btn-primary mt-lg-3 mt-2">Confirm Order<i class="fas fa-check ms-2"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

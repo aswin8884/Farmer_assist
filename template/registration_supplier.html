@@ -1,0 +1,103 @@
+{% extends 'commonbase.html' %}
+{% block content %}
+
+<style>
+
+    .form-container {
+       max-width: 600px;
+       margin: 0 auto;
+       padding: 30px;
+       background: #fff;
+       border-radius: 10px;
+       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     }
+       .w3l-contact-main .form-control {
+         width: 100%;
+         padding: 10px;
+         margin: 10px 0;
+         font-size: 14px;
+         border-radius: 5px;
+         border: 1px solid #ddd;
+       }
+     
+       .w3l-contact-main .form-control-file {
+         margin: 10px 0;
+         font-size: 14px;
+       }
+     
+       .btn-style {
+         padding: 10px 20px;
+         font-size: 16px;
+         border-radius: 5px;
+         border: none;
+         color: white;
+         cursor: pointer;
+       }
+     
+       .btn-style.btn-primary {
+         background-color: #007bff;
+       }
+     
+       .btn-style.btn-primary:hover {
+         background-color: #0056b3;
+       }
+     
+       @media (max-width: 768px) {
+         .w3l-contact-main .form-control, 
+         .w3l-contact-main .form-control-file {
+           font-size: 14px;
+         }
+       }
+     </style>
+
+<!-- contact-form -->
+<section class="w3l-contact-main" id="contact">
+    <div class="contact-infhny py-5">
+        <div class="container py-md-5">
+            <div class="title-content text-center mb-md-5 mb-4">
+                <h6 class="title-subw3hny">Registration</h6>
+                <h3 class="title-w3l mx-lg-5">Supplier</h3>
+            </div>
+            <div class="top-map">
+                <div class="map-content-9">
+                    <form method="post" enctype="multipart/form-data" class="form-container">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="text" name="name" id="Name" placeholder="Name" required="" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" name="contact" placeholder="Your phone number" required="" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="address" id="Sender" placeholder="Address" required="" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <p>Id proof (Any)</p>
+                            <input type="file" name="id_proof" id="id_proof" required="" class="form-control-file">
+                        </div>
+                        <div class="form-group">
+                            <p>Licence</p>
+                            <input type="file" name="licence" id="licence" required="" class="form-control-file">
+                        </div>
+                        <div class="form-group">
+                          <p>Profile picture</p>
+                          <input type="file" name="profile_picture" id="licence" required="" class="form-control-file">
+                      </div>
+                      <div class="form-group">
+                        <input type="email" name="email" id="Sender" placeholder="Email*" required="" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <input type="password" name="password" id="Sender" placeholder="Password*" required="" class="form-control">
+                      </div>
+                        <div class="text-center mt-5">
+                            <button type="submit" class="btn btn-style btn-primary">Register <i class="far fa-paper-plane ml-lg-3"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- //contact-form -->
+
+{% endblock %}

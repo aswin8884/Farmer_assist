@@ -1,0 +1,155 @@
+{% extends 'farmer/farmer_base.html' %}
+{% block content %}
+
+<style>
+    .container {
+        padding: 20px;
+    }
+
+    h2 {
+        font-family: 'Poppins', sans-serif;
+        color: #444;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .feedback-card {
+        background-color: #f5f5f5;
+        border: none;
+        border-radius: 10px;
+        transition: transform 0.2s ease-in-out;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .feedback-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid #ddd;
+        margin-right: 15px;
+    }
+
+    .feedback-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .user-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .user-name {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 3px;
+    }
+
+    .user-type {
+        font-size: 0.9rem;
+        font-weight: 400;
+        color: #777;
+    }
+
+    .rating {
+        display: flex;
+        align-items: center;
+        margin-top: 5px;
+    }
+
+    .stars-outer {
+        display: flex;
+        position: relative;
+    }
+
+    .star {
+        font-size: 1.2rem;
+        color: #ddd;
+    }
+
+    .star.filled {
+        color: gold;
+    }
+
+    .card-text {
+        margin-top: 10px;
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #555;
+    }
+
+    .feedback-footer {
+        margin-top: 15px;
+        font-size: 0.8rem;
+        color: #999;
+    }
+
+    @media (min-width: 768px) {
+        .feedback-card {
+            width: 70%; /* Adjust the card width for larger screens */
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+</style>
+
+<div class="container">
+    <h2>User Feedbacks</h2>
+    <div class="row">
+        {% for feedback in feedbacks %}
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <div class="feedback-card shadow-sm">
+                <div class="feedback-header">
+                    {% if feedback.user_type == "farmer" %}
+                        <img src="../static/media/{{ feedback.farmer_id.profile_picture }}" alt="User" class="profile-img">
+                    {% elif feedback.user_type == "specialist" %}
+                        <img src="../static/media/{{ feedback.specialist_id.profile_picture }}" alt="User" class="profile-img">
+                    {% elif feedback.user_type == "supplier" %}
+                        <img src="../static/media/{{ feedback.supplier_id.profile_picture }}" alt="User" class="profile-img">
+                    {% endif %}
+                    
+                    <div class="user-info">
+                        {% if feedback.user_type == "farmer" %}
+                            <h5 class="user-name">{{ feedback.farmer_id.name }}</h5>
+                        {% elif feedback.user_type == "specialist" %}
+                            <h5 class="user-name">{{ feedback.specialist_id.name }}</h5>
+                        {% elif feedback.user_type == "supplier" %}
+                            <h5 class="user-name">{{ feedback.supplier_id.name }}</h5>
+                        {% endif %}
+                        <p class="user-type">{{ feedback.user_type }}</p>
+                        <div class="rating">
+                            <div class="stars-outer">
+                                {% for i in "12345"|make_list %}
+                                    <span class="star {% if feedback.rating >= i %}filled{% endif %}">⭐</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="card-text">{{ feedback.feedback }}</p>
+                <div class="feedback-footer">
+                    Submitted on: {{ feedback.feedback_on }}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <div class="feedback-card">
+                <p class="text-muted text-center">No feedbacks available.</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
